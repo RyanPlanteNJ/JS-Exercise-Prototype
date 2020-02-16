@@ -120,10 +120,24 @@ Baby.prototype.play = function(){
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global Binding - Brings back the window (browser) or the  console object
+  2. Implicit Binding - Brings back what ever object index of the object you are calling 
+  (i.e. const myObj{
+    name: name;
+    age: age;
+    sayhello: function(name){
+      return `Hello, my name is ${this.name} < the "this" keyword in this case is
+      pointing to name.
+      console.log(this); < while this "this" will end up pointing to the object. The "this" 
+      keyword by itself is always going to point to the first object outside of where it is called.
+    }
+  })
+  3. New Binding - The new binding form of "this", lets us reiterate over "this"
+    by using the "new" keyword when calling on that object or function.
+  
+  4. Explicit Binding - Explicit binding is related to .call,.apply, and .bind. This allows you 
+  to override what a previous object pointed and changing its attributes.
+
 */
 
 
