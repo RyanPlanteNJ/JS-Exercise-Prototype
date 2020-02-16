@@ -94,7 +94,7 @@ Car.prototype.drive = function(distance){
     }else{
       this.odometer = this.tank * this.milesPerGallon;
       this.tank -= this.odometer / this.milesPerGallon;
-      return `I ran out of fuel at ${this.odometer}`;
+      return `I ran out of fuel at ${this.odometer} miles!`;
     }
      
      
