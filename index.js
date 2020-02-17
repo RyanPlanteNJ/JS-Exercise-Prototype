@@ -82,22 +82,24 @@ function Car(model, milesPerGallon) {
   this.odometer = 0;
 }
 
-Car.prototype.fill = function(gallons){
- this.tank += gallons;
+Car.prototype = {
+    fill: function(gallons){
+    this.tank += gallons;
    
-};
+    },
 
-Car.prototype.drive = function(distance){
-  this.odometer += distance;
-   if (this.odometer < this.tank * this.milesPerGallon){
-     this.tank -= this.odometer / this.milesPerGallon;
-    }else{
+    drive: function(distance){
+    this.odometer += distance;
+    if (this.odometer < this.tank * this.milesPerGallon){
+      this.tank -= this.odometer / this.milesPerGallon;
+     }else{
       this.odometer = this.tank * this.milesPerGallon;
       this.tank -= this.odometer / this.milesPerGallon;
       return `I ran out of fuel at ${this.odometer} miles!`;
     }
      
      
+}
 }; 
 
 
@@ -109,15 +111,19 @@ Car.prototype.drive = function(distance){
         + Should return a string "Playing with x", x being the favorite toy.
 */
 function Baby(name,age,favoriteToy) {
+  Person.call(this,favoriteToy)
   this.name = name;
   this.age = age;
   this.favoriteToy = favoriteToy;
 }
 
-Baby.prototype = Object.create(Person.prototype);
-Baby.prototype.play = function(){
-  return `Playing with ${this.favoriteToy}`;
-};
+Baby.prototype = Object.create(Person.prototype, {
+      play: {
+        value: function(){
+        return `Playing with ${this.favoriteToy}`;
+        }
+      }
+    });
 /* 
   TASK 4
 
