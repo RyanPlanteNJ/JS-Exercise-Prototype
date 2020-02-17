@@ -39,9 +39,27 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+  } 
 
-}
+  Person.prototype.eat = function(item){
+  if (this.stomach.length < 10){
+    this.stomach.push(item);
+    
+      // this.stomach = [...[10]];
+    }
+    };
+
+  Person.prototype.poop = function (){
+  this.stomach = [];
+  };
+
+  Person.prototype.toString = function(){
+    return `${this.name}, ${this.age}`;
+  };
 
 /*
   TASK 2
@@ -57,9 +75,33 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype = {
+    fill: function(gallons){
+    this.tank += gallons;
+   
+    },
+
+    drive: function(distance){
+    this.odometer += distance;
+    if (this.odometer < this.tank * this.milesPerGallon){
+      this.tank -= this.odometer / this.milesPerGallon;
+     }else{
+      this.odometer = this.tank * this.milesPerGallon;
+      this.tank -= this.odometer / this.milesPerGallon;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+     
+     
+}
+}; 
+
 
 /*
   TASK 3
@@ -68,18 +110,42 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name,age,favoriteToy) {
+  Person.call(this,favoriteToy)
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
 
+Baby.prototype = Object.create(Person.prototype, {
+      play: {
+        value: function(){
+        return `Playing with ${this.favoriteToy}`;
+        }
+      }
+    });
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global Binding - Brings back the window (browser) or the  console object
+  2. Implicit Binding - Brings back what ever object index of the object you are calling 
+  (i.e. const myObj{
+    name: name;
+    age: age;
+    sayhello: function(name){
+      return `Hello, my name is ${this.name} < the "this" keyword in this case is
+      pointing to name.
+      console.log(this); < while this "this" will end up pointing to the object. The "this" 
+      keyword by itself is always going to point to the first object outside of where it is called.
+    }
+  })
+  3. New Binding - The new binding form of "this", lets us reiterate over "this"
+    by using the "new" keyword when calling on that object or function.
+  
+  4. Explicit Binding - Explicit binding is related to .call,.apply, and .bind. This allows you 
+  to override what a previous object pointed and changing its attributes.
+
 */
 
 
